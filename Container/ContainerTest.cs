@@ -1,24 +1,23 @@
 using Xunit;
 
-namespace DeveloperSample.Container
+namespace DeveloperSample.Container;
+
+internal interface IContainerTestInterface
 {
-    internal interface IContainerTestInterface
-    {
-    }
+}
 
-    internal class ContainerTestClass : IContainerTestInterface
-    {
-    }
+internal class ContainerTestClass : IContainerTestInterface
+{
+}
 
-    public class ContainerTest
+public class ContainerTest
+{
+    [Fact]
+    public void CanBindAndGetService()
     {
-        [Fact(Skip="Not implemented")]
-        public void CanBindAndGetService()
-        {
-            var container = new Container();
-            container.Bind(typeof(IContainerTestInterface), typeof(ContainerTestClass));
-            var testInstance = container.Get<IContainerTestInterface>();
-            Assert.IsType<ContainerTestClass>(testInstance);
-        }
+        var container = new Container();
+        container.Bind(typeof(IContainerTestInterface), typeof(ContainerTestClass));
+        var testInstance = container.Get<IContainerTestInterface>();
+        Assert.IsType<ContainerTestClass>(testInstance);
     }
 }
